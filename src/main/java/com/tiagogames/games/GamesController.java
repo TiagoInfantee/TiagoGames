@@ -1,33 +1,37 @@
 package com.tiagogames.games;
 
 import com.tiagogames.games.Models.Game;
+import org.springframework.ui.Model;
 import com.tiagogames.games.Repository.GameRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class GamesController {
 
-    private final GameRepository gameRepository;
-
-    public GamesController(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    @Autowired
+    private GameRepository gameRepository;
 
     @GetMapping("/getallgames")
-    public List<Game> getAllGames() {
-        return gameRepository.findAll();
+    public String getAllGames(Model model) {
+        List<Game> games = gameRepository.findAll();
+        model.addAttribute("games", games);
+        return "list-games";
     }
 
-    @PostMapping("/addgame")
-    public Game addGame(Game newGame){
+    @GetMapping("/addgame")
+    public String showForm(Model model) {
+        model.addAttribute("game", new Game());
+        return "form-game";
+    }
 
-        newGame = (new Game( "Rocket League", "Football", 2015, 8.5));
-
-        return gameRepository.save(newGame);
+    @PostMapping("/savegame")
+    public String addGame(@ModelAttribute Game newGame) {
+        gameRepository.save(newGame);
+        return "redirect:/addgame?success";
     }
 
 }
