@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<meta charset="UTF-8">
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+
+<form th:action="@{/getallgames}">
+    <input type="submit" value="All Games"/>
+</form>
+
+<form th:action="@{/addgame}">
+    <input type="submit" value="Add Game"/>
+</form>
+
+</body>
+</html>

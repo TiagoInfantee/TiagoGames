@@ -15,6 +15,11 @@ public class GamesController {
     @Autowired
     private GameRepository gameRepository;
 
+    @GetMapping("/mainpage")
+    public String mainPage(){
+        return "main-page";
+    }
+
     @GetMapping("/getallgames")
     public String getAllGames(Model model) {
         List<Game> games = gameRepository.findAll();
