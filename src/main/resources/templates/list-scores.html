@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<meta charset="UTF-8">
+<head>
+    <title>All Scores</title>
+</head>
+<body>
+<h1>All Scores</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Game</th>
+        <th>Player</th>
+        <th>Score</th>
+        <th>Played At</th>
+    </tr>
+    <tr th:each="score : ${scores}">
+        <td th:text="${score.id}"></td>
+        <td th:text="${score.game.title}"></td>
+        <td th:text="${score.player.username}"></td>
+        <td th:text="${score.score}"></td>
+        <td th:text="${score.playedAt}"></td>
+    </tr>
+</table>
+</body>
+</html>
